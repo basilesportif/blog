@@ -7,4 +7,6 @@ npm install -g markdown-styles
 generate-md --layouts
 # substitute any layout for "github"
 generate-md --layout github --input ./input --output ./output
+
+generate-md --layout thomasf-solarizedcsslight --input ./input --output ./output
 ```

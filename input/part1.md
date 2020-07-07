@@ -564,9 +564,8 @@ Example 4 -- `5` knows how to compare cells, not just atoms. Erotic.
 0
 ```
 
-## `2`, the "Subject-Altering" Function
+## `2`, the "Subject-Altering" and "Stored Procedure" Function
 In all our examples so far, the subject has been defined at the start when we call the interpreter, and never changes. But what if we want a different subject?
-
 
 ### Motivation, or "Why Would I Want a Different Subject?"
  
@@ -626,7 +625,7 @@ The 2 inner `*`s run steps ***(1)*** and ***(2)***, and the outer one, around th
 ```
 
 #### Example 2 — grab a block of code from the subject in step ***(2)***, then run it in step ***(3)***.
-
+Think of this as grabbing a "stored procedure" from the subject.
 ```
 ~zod:dojo> .*([[4 0 1] 51] [2 [0 3] [0 2]]])
 52
@@ -661,7 +660,7 @@ We simply use `2` to transform our subject into an atom, and use `1` to quote th
 ```
 
 ## Summary and First Hoon Connections
-For those who know a bit of Hoon, Example 2 above is similar-ish to calling an arm that produces a gate, and then running the gate. Most of Hoon runs this type of code-getting + subject-altering Nock, and it all uses opcode `2` at its base.
+For those who know a bit of Hoon, Example 2 above is similar-ish to calling an arm that produces a gate, and then running the gate. Most of Hoon runs this type of stored-procedure + subject-altering Nock, and it all uses opcode `2` at its base.
 
 And for those who know Hoon, `[[4 0 1] 51]` should already be looking a lot like `[battery payload]`...that's not a coincidence.
 

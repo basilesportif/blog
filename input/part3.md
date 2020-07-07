@@ -71,6 +71,7 @@ We make our subject `[inc-gate val-to-decrement]`.
 [[7 [0 3] 4 0 1] 36]
 
 ::  now use that to set up the subject with a new tail (sample)
+
 ::  and call arm in memory slot 2 (our increment formula)
 > .*([inc-gate 36] [9 2 10 [3 [0 3]] 0 2])
 37

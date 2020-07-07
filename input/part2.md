@@ -13,7 +13,9 @@ Twitter: [@basile_sportif](https://twitter.com/basile_sportif)
 
 A word of encouragement: we're done with the hard part now. Every Nock function we learn in this section will be built from pieces in Part 1.
 
-None of these new functions are *necessary* to make Nock work. They are syntatic sugar that is part of the Nock definition, and must be built into every correct Nock implementation.  If you have seen macros or code expansions in other languages, that's another word for what's happening here.
+None of these new functions are *necessary* to make Nock work. All of them except Nock 10 and 11 are syntatic sugar that is part of the Nock definition, and must be built into every correct Nock implementation.  If you have seen macros or code expansions in other languages, that's another word for what's happening here.
+
+Nock 10 makes it easier to replace a memory value somewhere in a tree, and Nock 11 allows passing hints to the interpreter.
 
 One point of clarity: this syntactic sugar/code-expansion system is ***not*** extensible. This means that you can't invent your own Nock opcodes and still have that language be Nock; you're making a higher-level language on top of Nock at that point.
 
@@ -222,7 +224,7 @@ Why do we want this? In Example 1, we pin a copy of a value so that we can manip
 
 The above should be starting to feel **very** Hoon-ish: we're a minor code transform away from pinning new values to the head of a payload.
 
-## `9`, Create a Core and Run One of Its Arms
+## `9`, Create a Core and Run a Stored Procedure Arm inside It
 We're almost at full Hoon now, although still at a very low/raw level. `9` looks a little complicated...
 ```
 *[a 9 b c]       *[*[a c] 2 [0 1] 0 b]
@@ -261,6 +263,7 @@ c: [[1 4 0 3] 0 1]
 +*[[[4 0 3] 45] 0 3]
 :: grab mem slot 3
 +(45)
+
 46
 ```
 We start above with a subject that is not a core; it's just the atom `45`.  The code for `c` is then:
@@ -285,6 +288,8 @@ I like to think of `9` as having two parts:
 1. `c`: our "set up the subject" formula. This makes a new subject
 2. `b`: the memory slot in our new subject where an arm is
 And then we run the arm located at `b` against the new subject.
+
+You can think of this as setting up a subject, pulling a stored procedure from it, and then running that procedure against the subject.
 
 ## `10`, Replace a Memory Slot
 Before explaining `10`, we need to introduce a new operator, `#`.

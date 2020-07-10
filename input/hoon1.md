@@ -72,14 +72,16 @@ Next, `scan` crashes with a stack trace if `q.vex` is ~, printing `p.vex`. So `p
 
 So `rash` is a thin wrapper: make the input atom into a tape and `scan` it fully with the input rule, crashing on failure.
 
-## Takeaways From Day 1
+## Takeaways From Day 1b
 Starting to build intutions for what a `rule` is, since it comes up so often in parsing, even though we haven't looked at one yet. Edge and nail make total sense now. We saw the whole Hoon-AST-defining data structure as well and it was very straightforward. Also realized that it parses into those tagged cells for each rune's part of the AST.
 
 ### Parsing
 - nail is input starting at [line col]
 - edge is output of an arbitrary noun, with an error stacktrace given if necessary, and an "undone" input (continuation yes I cheated with docs) also passed back if it exists.
+- we haven't gone through the internals of a `rule` yet
 
 ### Codebase Covered
+I wrote this for today, but I think I'll stop it tomorrow.
 * 1-187
 * 4012-4021
 * 5545-5562
@@ -88,5 +90,7 @@ Starting to build intutions for what a `rule` is, since it comes up so often in 
 
 ## Day 2 Plan
 * vest to understand ream
-* tree to continue in order
-* cook just because
+* tree to continue in order (line 187 ish)
+* cook just because it seems relevant
+
+[Next: Day 2](hoon2.md)

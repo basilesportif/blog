@@ -74,10 +74,70 @@ We saw `full` yesterday: it takes a `rule` and makes it a rule that has to parse
 #### `ifix`, line 5335
 part of `4e parsing combinators`. Looks like our foray into `;~` is paying off already based on its body:
 ```
-;~(pfix -.fel ;~(sfix hof +.fel))
+::  fel = [gay gay]
+::  hof = tall:vast
+|*  {fel/{rule rule} hof/rule}
+  ;~(pfix -.fel ;~(sfix hof +.fel))
+  
 ```
-So we know this bad boy is going 
+So we know this bad boy takes two rules as its first argument and another rule at the end. Seems weird, especially since both rules are the same `gay`. Official docs say that `ifix` is a "parser modifier: surround with pair of ++rules, the output of which is discarded."  Ahhhh ok. So in the examples we see things like `(scan "-40-" (ifix [hep hep] dem))` yielding `q=40`. So it's using the two rules in `fel` to "trim" the input around the middle expression.
+
+When we look at `gay`, that seems confirmed:
+```
+++  gay  ;~(pose gap (easy ~))
+```
+`pose` says "first or second", so basically it's matching gap or doing nothing but NOT failing. 
+
+`easy`'s source (line 5280) is...easy. It's a no-op that puts whatever value you pass as the "parsed value". In this case we just pass `~`. It also returns the entire unparsed nail as its continuation, which makes sense.
+
+`++  vast` is labeled as "main parsing core", and `tall:vast` is "full tall form". It's a little weird that we don't seem to have anything here for wide form but maybe that will become clear in a sec.
+
+#### `pose`
+Return `vex` if it parsed a value. If not, run the `rule` with no sample (i.e. default sample) and return that edge. For the current `hair` (parsing location), use whichever of `vex` and the default are further along.
+
+We run across something weird, however: `=+  roq=(sab)`. I thought at first this was the bunt value, but that wouldn't allow things to work, because `q.roq` wouldn't contain the continuation parser (`nail` that we still need to parse).
+
+Then I looked back at `;~`, and it's defined as:
+```
+;~(a b c) expands to:
+(a (b arg) c(+6 arg))
+```
+So we knock out the sample with our incoming argument all the way down the line. That means that `easy` has access to the same initial `nail` as `gap`.
+
+#### `pfix` and `sfix`
+`pfix` says that it "discards first rule" and `sfix` "discards last rule". It's pretty clear *what* they do in `ifix` (discard `gap`s), but let's get into their code a bit. `pfix`:
+```
+  |*  sam={vex/edge sab/rule}
+  %.  sam
+  (comp |*({a/* b/*} b))
+```
+This takes us into the `comp` combinator. We'll leave that for later I think.
+
+#### `ifix`/`pfix`/`sfix`
+These all parse part of input and discard the rest:
+* `ifix` keeps `i`, "inner"
+* `pfix` keeps `p`, "post"
+* `sfix` keeps `s`, "start"
+
+## `cook` and `sear`
+I said I'd hit it today, and now it's almost too easy, conceptually: `cook` just turns a rule into a rule that slams a gate on the `p` in the edge it produces.
+
+`sear` is the same as cook, except that its input gate (`pyq`) outputs a `unit` value. If `(pyq parse-result)` is `~`, then the whole parse fails.
+
+So `cook` needs just the parse to succeed, whereas `sear` needs *both* the parse and subsequent `turn` to succeed.
 
 ## Takeaways
-* `;~` is really big to get. 
+* `;~` gets heavily used in parsing
+* `;~` knocks out the sample in *all* its gates
+* parsing is pretty mechanical once you "get" `;~`
+* a lot of the weird words like `vex` and `sab` appear very very frequently and have an idiom to them.
+
+## Possible Writeups
+It's becoming clear that there's a *lot* to be written about `;~` and parsing in general. It's not super-complicated, but if it were well-explained it would speed up grokking of that part by 10x+.
+
+## Up Next
+* walk through parsing `comp`
+* keep diving into tall-form parsing
+* finish `vest`?
+* Go back to `tree` if I have no better ideas
 

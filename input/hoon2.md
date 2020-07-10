@@ -129,11 +129,14 @@ So `cook` needs just the parse to succeed, whereas `sear` needs *both* the parse
 ## Takeaways
 * `;~` gets heavily used in parsing
 * `;~` knocks out the sample in *all* its gates
+* `:~` is easiest to understand inductively
 * parsing is pretty mechanical once you "get" `;~`
 * a lot of the weird words like `vex` and `sab` appear very very frequently and have an idiom to them.
 
 ## Possible Writeups
 It's becoming clear that there's a *lot* to be written about `;~` and parsing in general. It's not super-complicated, but if it were well-explained it would speed up grokking of that part by 10x+.
+
+I'd focus a lot on how `;~` and parsing are easiest to understand inductively: lock down the "only one gate passed" base case, and then show how the `n+1` stage builds up when you add a 2nd gate.
 
 ## Up Next
 * walk through parsing `comp`

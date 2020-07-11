@@ -14339,7 +14339,7 @@
   ^-  (like hoon)
   %.  tub
   %-  full
-  (ifix [gay gay] tall:vast)
+  (ifix [gay gay] tall:vast)o
 ::
 ++  vice
   |=  txt/@ta

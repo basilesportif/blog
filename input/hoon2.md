@@ -144,3 +144,4 @@ I'd focus a lot on how `;~` and parsing are easiest to understand inductively: l
 * finish `vest`?
 * Go back to `tree` if I have no better ideas
 
+[Prev: Day 1](hoon1.md) | [Next: Day 3](hoon3.md)

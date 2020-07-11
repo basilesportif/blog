@@ -56,7 +56,8 @@ And that takes us back to `rash`, which takes `naf=@` and `sab=rule` and runs `(
 So with `(trip naf)` we turn a cord into a tape. That takes us down to `scan` right below. We can already guess now that scan is going to work through the tape until it hits some `rule`.
 
 ##### scan
-Shonough, `scan` takes `{los/tape sab/rule}`. It runs `(full sab)`, which takes a `rule` and returns a gate expecting a `nail` (parsing input). 
+Shonough, `scan` takes `{los/tape sab/rule}`. It runs `(full
+sab)`, which takes a `rule` and returns a gate expecting a `nail` (parsing input). 
 
 ###### full
 `full` is interesting and helps us understand `edge`. The gate it returns runs the closured rule on the passed nail (i.e. parses it, returning an `edge`)., but ONLY returns a value for the edge if there is no more input. This is line 5296:

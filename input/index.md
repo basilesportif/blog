@@ -10,6 +10,7 @@ I want the Internet to not suck.
 I have other interests and may write about them as the mood strikes.
 
 ## Blog
+* [What Urbit Is](whaturbitis.html)
 * [Urbit and the Great Web 2.0 Tradeoff](web20tradeoff.html)
 
 ## Guides

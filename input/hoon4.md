@@ -119,6 +119,7 @@ Not much to spend time on here: it's just adding `p` and `q` faces to the head a
 * `here` to attach parse location metadata
 * general pattern: either transform the `bind` function for `;~` (like `glue` does), or transform two rules into a new one (like `most`) does.
 * will be really good for writing up parsing to go back and do so in terms of where things bottom out at various points.
+* feel comfortable with `rap`'s process for turning tapes into single atoms
 
 ## Next Up
 * I skipped over `++  stir`; would be fun to take a whole day breaking it down

@@ -53,7 +53,7 @@ Ohhh ok, so `knee` is
  =|  {gar/* sef/_|.(*rule)}
   |@  ++  $
 ```
-which is just a wet gate. 
+which is just a wet gate.
 
 ## Takewaways
 * `comp` extracts the general pattern of using a function to combine `p` in a parser combinator

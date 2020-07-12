@@ -5,6 +5,10 @@ If you think of the current client+server space, Linux completely dominates serv
 
 A world in which Urbit wins looks a lot like our current one on the client side (barring further innovations).  However, on the server side, the huge cloud backends of a lot of social media and Saas companies are downsized substantially; they are necessary when all of a service's users live in one giant database. The huge array of cloud services in AWS etc would also be devalued since they also exist for that use case. Urbit only needs commoditized Unix server+storage configurations.
 
+As `~rovnys-ricfer` said [here](https://gist.github.com/belisarius222/e9e4b382eda75ad788addf317eda8d99):
+> "If your software needs to run in hell, build it that way from the start."
+> "An Urbit ship is not an enterprise SaaS product and does not need to run in this hell; it exists for just one person, with natural pressure pushing it in the opposite direction from Amazon’s web services. Instead of needing a ship’s state and functionality sharded into microservices strewn across multiple clusters, an Urbit instance is easiest to manage as a single server with all its state unified into one data structure and its event log stored as one totally ordered sequence of state updates -- the antithesis of a distributed system."
+
 Because Urbit is so isolated and self-contained, it is already able to commoditize whatever hardware it runs on. I switched my ship's hosting from my laptop to AWS to Digital Ocean to Hetzner with ~0 glitches or abstraction leakages.
 
 ## Base System Description
@@ -29,7 +33,7 @@ The Urbit Unix interpreter also can be updated. These updates do not affect syst
 * exactly-once messaging: this is enforced at the network protocol level, which means you can have an app mirror another ship's state and it "just works"
 * remote data subscriptions: you can subscribe to declared local and remote data sources inside other apps with a simple command in a userspace app, and you will get typed, validatable data back over the wire.
 * decouples static resources and code ("filesystem") from application dbs. This lets the two things be handled differently logically for updates
-* OTA (live kernel upgrades) -- see [Ford Fusion writeup](https://gist.github.com/belisarius222/e9e4b382eda75ad788addf317eda8d99) and [Why Hoon](https://urbit.org/blog/why-hoon/) for why this is possible and how it works
+* OTA (live kernel upgrades) -- [Why Hoon](https://urbit.org/blog/why-hoon/) has a good explanation of the properties of Hoon and Nock that make this possible, in addition to the Ford discussion above
 * secure, programmable identity
 * negotiate connections for high bandwith apps
   - binary data: allows seamless, integrated S3 storage

@@ -14,9 +14,7 @@ Let's do the easiest one first--a place to talk with your friends.  You message 
 ## Share Short Text Updates
 Alright, this one is super-easy. Twitter is the gold standard here: you can throw your messages out to the world and reply to anybody, and you can even make groups of trusted people and send DMs to other interesting accounts. I love Web 2.0.
 
-Of course, you have to be a bit careful about what you say, because the wrong thing could get you reported and banned, and you'll lose all posts you've made and the social graph you've built up. No biggie, just have to lightly monitor every thought you have and also anticipate where Wokeness will be at 2 years from now so that you don't lose the asset then. About 30% of the mental energy for each Tweet goes to paying this anticipation/filtering tax.
-
-You also should probably use an anon account so that mildly spicey but not bannable on Twitter things aren't reported to your employer, but this mental tax is definitely worth it.
+Of course, you have to be a bit careful about what you say, because the wrong thing could get you reported and banned, and you'll lose all posts you've made and the social graph you've built up. The issue here isn't a free speech one; it's that you spend a lot of time developing a property that can be arbitrarily destroyed because of the fact that it's just unregulated lines in Twitter's DB.
 
 You create a group that includes your Signal buddies and some new friends you make on here. Things are mostly good, although you're right back in the Facebook situation where you have to be careful about everything you say so that none of you lose your accounts.
 
@@ -28,7 +26,7 @@ You approach this in two ways:
 2. You spam out messages on Twitter about the location of your new platform and put it in your profile. 
 
 ## Blogging
-Now it's time to blog, both because you like the longer format, and because finally it's a piece of digital property you own.  You're not retarded, so you don't use Blogspot or Medium--yeah they handle all the sysadmin and hosting and SEO for you, but there's no point in doing a blog if it can be yanked away for violating XYZ Woke Talking Point that you forgot about.
+Now it's time to blog, both because you like the longer format, and because finally it's a piece of digital property you own.  You're not retarded, so you don't use Blogspot or Medium--yeah they handle all the sysadmin and hosting and SEO for you, but there's no point in doing a blog if it can be yanked away at any time, with no recourse, for violating arbitrary terms of service.
 
 So now you're into the wonderful world of server maintenance. This shouldn't be sooooo bad...just follow some tutorials online and get your Wordpress blog up and....OK I lied, it is that bad. If you're lucky you can cargo-cult your way through some commands on Digital Ocean, but otherwise you pay a few hundred bucks for someone to set it up for you.
 
@@ -46,7 +44,7 @@ As you hang out in Los Angeles with your favorite commenters over some drinks ta
 You find a way to message anyone you want to work with privately, get their Google id, and invite them to a Google doc. 
 
 ## Equilibrium
-Eventually you get cancelled on Twitter because you don't participate in the 2022 Auto-Emasculation Challenge and thus are clearly transphobic. Your blog chugs along, and you still have your friends on Signal. You lose a Google document you had worked on for weeks because something in Google's black-box algo pattern-matched it as adjacent to some COVID-19 conspiracy theory. But the rest of your documents are kind of still there, so...winning?
+Eventually you get cancelled on Twitter because you say the wrong thing, but are able to salvage the 50 contacts you remembered from you 5,521 followers. Your blog chugs along, and you still have your friends on Signal. You lose a Google document you had worked on for weeks because something in Google's black-box algo pattern-matched it as adjacent to some COVID-19 conspiracy theory. But the rest of your documents are kind of still there, so...winning?
 
 ## The Web 2.0 Tradeoff
 In light of this highly representative story, we now can re-visit the Web 2.0 Tradeoff.

@@ -217,3 +217,4 @@ As we've seen, the wet gate's sample type matters inasmuch as the gate's formula
 
 ## Passing Wet Gates as Arguments
 * explain `comp` and `raq`
+* For higher order wet gates that take gates as arguments (like turn and comp), whether you want to pass a wet or dry gate depends on how general the call site is. If the call site knows the types of data it will work with, you can pass a dry gate that matches those. If not, you'll need to use wet.

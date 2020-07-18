@@ -1,6 +1,6 @@
 # Wet Gates, Explained at Last
 
-Wet gates in Hoon are not mystical or particularly complicated to understand. However, they are so fundamentally different from dry gates that the shared word "gate" probably just confuses.
+Wet gates in Hoon are not mystical or particularly complicated to understand. However, they differ from dry gates in clear, mechanical ways that are important to get a handle on.
 
 Wet gates are simple macros that are expanded in place and checked for type safety at compilation time. They have strict, predictable rules that can be observed by playing around with them, and are **not** an "anything goes" free-for-all, although they initially may seem like that.
 

@@ -213,8 +213,33 @@ Here, the formula is doing a lot more. (Exactly what it's doing will be clear to
 ### So, Does the Wet Gate's Sample Type Matter?
 As we've seen, the wet gate's sample type matters inasmuch as the gate's formula does operations that depend on that type. As a result, when you see wet gates declared with types, the type usually indicates to you how generic the operations performed inside are, although we don't know for sure until we compile the Nock at a given call site.
 
-## Wet Gates as Higher-Order Functions
+## Wet Gates as Higher-Order Gates
+A "higher-order" gate is just a gate that takes a gate as an argument, and uses it inside its formula. The clearest example of this is `turn` in `hoon.hoon`, which simply takes a list and a gate, and modifies each element of the list using the gate.
 
-## Passing Wet Gates as Arguments
+### `turn`'s code
+```
+++  turn
+  ~/  %turn
+  |*  [a=(list) b=gate]
+  =>  .(a (homo a))
+  ^-  (list _?>(?=(^ a) (b i.a)))
+  |-
+  ?~  a  ~
+  [i=(b i.a) t=$(a t.a)]
+```
+The key things to note here is that `b` is always used as a gate that takes the type inside `a` (a `list`) as its sample. So as long our calls of turn use a sample with `a` as a `(list xtype)` and `b` as a gate that takes `xtype` as its sample, the code at the call site will expand fine.
+
+The other key here is that at the call site, we know all of the types involved. For example:
+```
+> (turn ~[9 56 4] dec)
+~[8 55 3]
+```
+When we create our call to `turn`, we know that we have a list of a certain type (here of atoms), and so we can choose a gate that works on that type (`dec`). Then the compiler goes ahead and re-compiles a new core for `turn` with this new sample, and inserts that core and calls it.
+
+### Passing Wet Gates as Arguments
+So for `turn` we knew at the call site what types we were dealing with. But what if we didn't?
+
+In that case, we'd want to use a wet gate at the call site itself.
+
 * explain `comp` and `raq`
 * For higher order wet gates that take gates as arguments (like turn and comp), whether you want to pass a wet or dry gate depends on how general the call site is. If the call site knows the types of data it will work with, you can pass a dry gate that matches those. If not, you'll need to use wet.

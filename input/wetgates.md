@@ -38,6 +38,8 @@ So the dry gate rune `|=` is just a code expansion: it "rewrites" code in place:
 ### Dry Gate Calling
 To use our dry gate in other parts of code, the compiler simply gets its core, replaces its sample with a user-provided sample if one is provided, and runs its formula.  For those who are interested, [Part 3 of My Nock Primer](part3.html) gives simple examples how the Nock 9 opcode is used to do this.
 
+The compiler also checks at each call location to make sure that the new sample nests under the dry gate's original sample.
+
 The key here is that *dry gates are only compiled once*, and then are called potentially many times in programs by replacing the sample and running the formula.
 
 ## What Are Macros?
@@ -99,21 +101,83 @@ Whenever a wet gate is called anywhere in a program, the compiler does *not* cal
 1. Replace the sample of the gate with the caller's sample
 2. *re-compile* the formula into Nock using that new sample
 3. Check whether the original compiled Nock and this new compiled Nock are the same
-4. If the same, insert the newly compiled formula+sample into the code at this call site: this is a macro expansion
+4. If the same, insert the newly compiled formula+sample into the code at this call site: this is a macro expansion.  Do *not* check whether the new sample nests under the original sample; wet gates don't care about that.
 
-The key difference between dry gate calls and wet gate calls is that dry gate calls use the Nock `9` opcode to call a previously created core with a new sample, while wet gate
+The key difference between dry gate calls and wet gate calls is that
+* dry gate calls use the Nock `9` opcode to call a previously created core with a new sample. They insert that Nock `9` code in the call site
+* wet gate calls fully re-compile the Nock with a new sample, and insert *that newly compiled code* in the call site.
 
 ### Nock Compilation Example
-This might be easier for some to understand with a concrete example. What does it look like when newly compiled Nock is the same as the original wet gate Nock? Thanks to the magic of Urbit's "Nock all the way down" data structures, we can quickly check!
+This is clear clearest to understand with a concrete example. What does it look like when newly compiled Nock is the same as the original wet gate Nock? Thanks to the magic of Urbit's "Nock all the way down" data structures, we can quickly check!
 
-#### Example 1
+In these examples, we use `-.the-wet-gate-name` to get the head of the wet gate, i.e. its formula (as always, `[formula payload context]`).  The Nock should be simple for those who know it, but you can also just compare it and see when it's the same or different.
+
+#### Example 1: Same Nock
 ```
+> -.wet-listify
+[[0 6] 1 0]
+
+> =wet-cord-listify |*(a=@t [a ~])
+> -.wet-cord-listify
+[[0 6] 1 0]
+
+> =wet-gate-listify |*(a=$-(* *) [a ~])
+> -.wet-gate-listify
+[0 6] 1 0]
+```
+Even those these gates have different sample types, their Nock compiles to the same formula. This makes intuitive sense: all of them use the sample in the same way. They just fetch it and stick it in the head of a list.
+
+#### Example 2: Good, Bad, Ugly
 
 ```
+> =wet-gate-call |*(f=[$-(* *)] (f 3))
+> -.wet-gate-call
+[8 [0 6] 9 2 10 [6 7 [0 3] 1 3] 0 2]
 
+> =wet-gate-call-2 |*(f=_dec (f 3))
+> -.wet-gate-call-2
+[8 [0 6] 9 2 10 [6 7 [0 3] 1 3] 0 2]
+
+> =wet-gate-bad |*(f=@ud (f 3))
+-find.$.+2
+dojo: hoon expression failed
+
+> =wet-gate-diff-nock |*(f=@ud f)
+> -.wet-gate-diff-nock
+[0 6]
+```
+With `wet-gate-call`, our wet gate creates Nock that runs a gate sample on the number `3`. That has the same Nock as `wet-gate-call-2`, whose sample is the type of gate `dec`.
+
+In `wet-gate-bad`, however, it breaks, because we try to compile with a sample of `@ud` (bunt value: `0`), but that has no arm, so it doesn't work to call it as a function, and we get an error saying that there's no `+2` memory slot.
+
+Finally, `wet-gate-diff-nock` *does* compile, but when we check its Nock formula, it's different, because it doesn't call the sample as a gate.
+
+Think of the compiler of doing these steps each time it encounters a wet gate call. Usually when it throws an error it does so because the formula tries to "do" something to the sample that isn't possible.
+
+### Call Site Expansion Code
+The above were all compilations of original wet gates, but the call-site expansion is basically the same. You can think of it as being like this:
+```
+::  original wet gate
+> =wet-listify |*(a=* [a ~])
+> -.wet-listify
+[[0 6] 1 0]
+
+::  macro expansion for a new sample type at a call site
+::  this is what would basically happen if the call site sample were 'timluc'
+::  as in (wet-listify 'timluc')
+> =full-expansion =+  a='timluc'
+> |@
+> ++  $  [a ~]  --
+
+> -.full-expansion
+[[0 6] 1 0]
+> +<.full-expansion
+a='timluc'
+```
+Notice that our sample of our `full-expansion` core is now type `@t`, but the Nock is the same. This *new* core will be inserted at the call site and called.
 
 ## Wet Gate Sample Constraints
-Does the declared sample even matter for a wet gate? That depends on how the sample is used inside the gate.
+If wet gates just recompile the gate, and don't check for whether the new sample nests under the original one, does the declared sample even matter for a wet gate? That depends on how the sample is used inside the gate.
 
 ### Example 1: Sample Is Used Specifically
 ```
@@ -152,3 +216,4 @@ As we've seen, the wet gate's sample type matters inasmuch as the gate's formula
 ## Wet Gates as Higher-Order Functions
 
 ## Passing Wet Gates as Arguments
+* explain `comp` and `raq`

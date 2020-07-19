@@ -214,13 +214,17 @@ Here, the formula is doing a lot more. (Exactly what it's doing will be clear to
 As we've seen, the wet gate's sample type matters inasmuch as the gate's formula does operations that depend on that type. As a result, when you see wet gates declared with types, the type usually indicates to you how generic the operations performed inside are, although we don't know for sure until we compile the Nock at a given call site.
 
 ## Wet Gates as Higher-Order Gates
-A "higher-order" gate is just a gate that takes a gate as an argument, and uses it inside its formula. The clearest example of this is `turn` in `hoon.hoon`, which simply takes a list and a gate, and modifies each element of the list using the gate.
+So far, we've just seen wet gates declared and then called from elsewhere (the "call site", which has been the Dojo in our examples). However, you can also create wet gates that themselves take wet and dry gates as arguments.
 
-### two separate considerations when passing gates to wet gates
-1. How does this expand mechanically?
-2. When do I want to pass wet vs dry?
+These gates with gate arguments are called "higher-order" gates. They receive a gate as an argument, and uses it inside in the formula. The clearest example of this is `turn` in `hoon.hoon`, which simply takes a list and a gate, and modifies each element of the list using the gate.
+
+### Analyzing Higher-Order Wet Gates
+When analyzing higher-order wet gates, there are two key questions:
+1. How is the gate argument used inside the formula?
+2. Why does this take a dry vs. wet gate as its argument? (or vice versa)
 
 ### `turn`'s code
+`turn` takes a list and a dry gate as arguments:
 ```
 ++  turn
   ~/  %turn
@@ -240,13 +244,37 @@ The other key here is that at the call site, we know all of the types involved. 
 ```
 When we create our call to `turn`, we know that we have a list of a certain type (here of atoms), and so we can choose a gate that works on that type (`dec`). Then the compiler goes ahead and re-compiles a new core for `turn` with this new sample, and inserts that core and calls it.
 
+To answer our two questions from above:
+1. "How is the gate argument used inside the formula?"
+Answer: it's a dry gate, so it is compiled to Nock *once*, and then that formula is called 2 separate times inside `turn`.
+2. "Why does `turn` take a dry gate as its argument instead of a wet one?"
+Answer: `turn` takes a dry gate, because, as we saw above, its callers know what types they are dealing with.
+
 ### Passing Wet Gates as Arguments
 So for `turn` we knew at the call site what types we were dealing with. But what if we didn't?
 
 In that case, we'd want to use a wet gate at the call site itself.
 
-* explain `comp` and `raq`
-* explain how `raq`'s usage inside `comp` is itself a wet gate call site
+### `comp`
+`comp` is another `hoon.hoon` function, used for parsing. We'll ignore exactly what it does, and just look at two parts of it:
+```
+++  comp
+  =+  raq=|*({a/* b/*} [a b]) 
+  |@
+  ++  $
+  ::  ... body elided ...
+    [p=yur q=[~ u=[p=(raq p.u.q.vex p.u.q.yit) q=q.u.q.yit]]]
+```
+We use the `=+` with `|@  ++  $` syntax we saw earlier to declare a wet gate with non-bunt default sample. 
+
+Our sample is the wet gate `raq`, which *itself is a wet gate*. Don't let this throw you: `turn` was a wet gate that took a dry gate sample; `comp` is just a wet gate that takes a wet gate sample.
+
+`raq` is used in the body where we have `p=(raq p.u.q.vex p.u.q.yit)` -- i.e., it is called with 2 arguments.
+
+So we can answer our first question: "How is the gate argument (`raq`) used inside the formula?"
+Answer: `raq` is recompiled and turned into Nock in place using `p.u.q.vex` and `p.u.q.yit` as the sample to compile with.
+
+The 2nd question: "Why does `comp` take a wet gate instead of a dry one"
 
 For "when to pass dry vs wet":
 * contrast the knowledge we have of types at `turn` call site vs. `comp` call site (`pfix`)

@@ -271,12 +271,32 @@ Our sample is the wet gate `raq`, which *itself is a wet gate*. Don't let this t
 
 `raq` is used in the body where we have `p=(raq p.u.q.vex p.u.q.yit)` -- i.e., it is called with 2 arguments.
 
-So we can answer our first question: "How is the gate argument (`raq`) used inside the formula?"
-Answer: `raq` is recompiled and turned into Nock in place using `p.u.q.vex` and `p.u.q.yit` as the sample to compile with.
+So we can answer our 1st question: "How is the gate argument (`raq`) used inside the formula?"
+Answer: whatever wet gate is passed as `raq` is recompiled and turned into Nock in place using `p.u.q.vex` and `p.u.q.yit` as the sample to compile with.
 
-The 2nd question: "Why does `comp` take a wet gate instead of a dry one"
+The 2nd question: "Why does `comp` take a wet gate argument instead of a dry one?"
+To answer this with `turn`, we made a representative call in Dojo. For `comp`, let's search `hoon.hoon` for `(comp` and see what we get...
+```
+++  pfix                                                ::  discard first rule
+  ~/  %pfix
+  |*  sam={vex/edge sab/rule}
+  %.  sam
+  (comp |*({a/* b/*} b))
+::  ...
+++  sfix                                                ::  discard second rule
+  ~/  %sfix
+  |*  sam={vex/edge sab/rule}
+  %.  sam
+  (comp |*({a/* b/*} a))
+```
+Both `pfix` and `sfix` are wet gates...so they don't know exactly what types of `edge` and `rule` they'll be working with until they themselves are called in some program. So our call to `comp` needs to be a wet gate, because a dry one would be too specific at the time `pfix` and `sfix` are written.
 
-For "when to pass dry vs wet":
-* contrast the knowledge we have of types at `turn` call site vs. `comp` call site (`pfix`)
+### Summary of Higher-Order Wet Gates
+* For higher order wet gates that take gates as arguments (like `turn` and `comp`), whether you want to pass a wet or dry gate to them depends on how general the call site is. If the call site knows the types of data it will work with, you can pass a dry gate that matches those. If not, you'll need to use wet.
 
-* For higher order wet gates that take gates as arguments (like turn and comp), whether you want to pass a wet or dry gate depends on how general the call site is. If the call site knows the types of data it will work with, you can pass a dry gate that matches those. If not, you'll need to use wet.
+## Summary
+We learned that
+* dry gates compile just once, and then that compiled Nock is called from everywhere they're used
+* wet gates compile *each time they are used*, substituting in their new arguments as the sample types, and making sure that the generated Nock matches that of the first compilation (with a default sample)
+* wet gates can be thought of as macros that expand a big chunk of code in place, while type-checking to make sure that the expanded code works with the sample types in that call location
+* wet gates can be higher order and take either dry or wet gates as arguments. They take dry gates when the call site knows the types it's dealing with, and wet gates when the call site doesn't know at the time it's written.

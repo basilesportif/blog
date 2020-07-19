@@ -216,6 +216,10 @@ As we've seen, the wet gate's sample type matters inasmuch as the gate's formula
 ## Wet Gates as Higher-Order Gates
 A "higher-order" gate is just a gate that takes a gate as an argument, and uses it inside its formula. The clearest example of this is `turn` in `hoon.hoon`, which simply takes a list and a gate, and modifies each element of the list using the gate.
 
+### two separate considerations when passing gates to wet gates
+1. How does this expand mechanically?
+2. When do I want to pass wet vs dry?
+
 ### `turn`'s code
 ```
 ++  turn
@@ -242,4 +246,9 @@ So for `turn` we knew at the call site what types we were dealing with. But what
 In that case, we'd want to use a wet gate at the call site itself.
 
 * explain `comp` and `raq`
+* explain how `raq`'s usage inside `comp` is itself a wet gate call site
+
+For "when to pass dry vs wet":
+* contrast the knowledge we have of types at `turn` call site vs. `comp` call site (`pfix`)
+
 * For higher order wet gates that take gates as arguments (like turn and comp), whether you want to pass a wet or dry gate depends on how general the call site is. If the call site knows the types of data it will work with, you can pass a dry gate that matches those. If not, you'll need to use wet.

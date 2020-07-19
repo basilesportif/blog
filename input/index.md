@@ -15,6 +15,9 @@ I have other interests and may write about them as the mood strikes.
 
 ## Guides
 
+### Hoon
+* [Wet Gates, Explained at Last](wetgates.html)
+
 ### Nock for Everyday Coders
 * [Part 1: Basic Functions and Opcodes](part1.html)
 * [Part 2: The Rest of Nock and Some Real-World Code](part2.html)

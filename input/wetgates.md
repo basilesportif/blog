@@ -291,6 +291,22 @@ To answer this with `turn`, we made a representative call in Dojo. For `comp`, l
 ```
 Both `pfix` and `sfix` are wet gates...so they don't know exactly what types of `edge` and `rule` they'll be working with until they themselves are called in some program. So our call to `comp` needs to be a wet gate, because a dry one would be too specific at the time `pfix` and `sfix` are written.
 
+#### Note on Gates Passed by `pfix` and `sfix`
+The observant spergmeister may notice that while the default `raq` value is a wet gate that takes `[a=* b=*]` and returns `[a b]`, the wet gates passed by `pfix` and `sfix` only return `b` and `a`, respectively. Is this an issue?
+
+The answer follows from our "Wet Gate Sample Constraints" discussion above. Ignore the fact that `raq` is a wet gate, and just focus on the fact that it's the sample of `comp`. Because `comp` is a wet gate, when it is first compiled it uses the default value of `raq` and makes sure that that works.
+
+`raq` is only used in one place: `p=(raq p.u.q.vex p.u.q.yit)`, and it works here, because it is taking two arguments, and just assigning the return value to the face `p`.
+
+When we call `comp` in `pfix`, that initial compilation of `comp` is re-done, using the new gate `|*({a/* b/*} b)`. This gate is inserted into the expression `p=(raq p.u.q.vex p.u.q.yit)`. Does that work? Yup, it also takes two arguments, and because the return value is simply assigned to `p`, it doesn't matter that we return `b` instead of `[a b]`.
+
+However, imagine that, hypothetically, `comp` *did* use the return value of `raq` in a cell-specific way:
+```
+::  hypothetical alternate `raq` usage in `comp`
+p=-:(raq p.u.q.vex p.u.q.yit)
+```
+In this case, we might not be able to pass `|*({a/* b/*} b)` as our call-site argument in `pfix`, because when the compiler re-compiled `comp` with this value, it would choke whenever the `b` returned was not a cell.
+
 ### Summary of Higher-Order Wet Gates
 * For higher order wet gates that take gates as arguments (like `turn` and `comp`), whether you want to pass a wet or dry gate to them depends on how general the call site is. If the call site knows the types of data it will work with, you can pass a dry gate that matches those. If not, you'll need to use wet.
 

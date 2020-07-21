@@ -16,6 +16,8 @@ Because Urbit is so isolated and self-contained, it is already able to commoditi
 ### Overview
 Urbit is a deterministic VM with an integrated ACID database. It allows encrypted networking with other Urbit VM's on a private overlay network where communication is peer-to-peer, identities are stable, and peer discovery is negotiated by galaxies (eventually will be done by stars).  The OS kernel provides a specific mechanism for userspace applications to upgrade themselves and transition their internal databases to new schema.
 
+Communications between network nodes and within one Urbit process are strongly typed, which reduces internal impedance mismatch.
+
 ### Identity
 The source of truth for identities is an Ethereum contract (program/db) called Azimuth, which can be interfaced with using direct calls to the Eth blockchain or, more conveniently, but making those calls through [bridge.urbit.org](https://bridge.urbit.org).
 
@@ -33,6 +35,7 @@ The Urbit Unix interpreter also can be updated. These updates do not affect syst
 * exactly-once messaging: this is enforced at the network protocol level, which means you can have an app mirror another ship's state and it "just works"
 * remote data subscriptions: you can subscribe to declared local and remote data sources inside other apps with a simple command in a userspace app, and you will get typed, validatable data back over the wire.
 * decouples static resources and code ("filesystem") from application dbs. This lets the two things be handled differently logically for updates
+* data inside Urbit (stored locally or sent between nodes and also interprocess communication) is strongly typed, which eliminates the usual impedance mismatches at the DB/filesystem/application interface layer.
 * OTA (live kernel upgrades) -- [Why Hoon](https://urbit.org/blog/why-hoon/) has a good explanation of the properties of Hoon and Nock that make this possible, in addition to the Ford discussion above
 * secure, programmable identity
 * negotiate connections for high bandwith apps

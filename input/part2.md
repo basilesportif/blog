@@ -117,7 +117,7 @@ CRASH!!
 This is exactly what we want: the program crashes unless we are doing a boolean test that returns a `0` or `1` (converted to a `2` or `3`) in step ***(4)***.
 
 #### Step 2
-We now we have our validated `2` or `3` to plug into step ***(2)***. Let's imagine `c` is the simple formula `[0 1]` and `d` is `[1 203]`
+We now have our validated `2` or `3` to plug into step ***(2)***. Let's imagine `c` is the simple formula `[0 1]` and `d` is `[1 203]`
 ```
 :: if step 3 returned "2" (true)
 *[[[0 1] [1 203]] 0 2]

@@ -156,7 +156,7 @@ In this example we will build a Nock core that compares two numbers and returns 
 * `1` if `a > b`
 * `2` if `a < b`
 
-The trick is that we only mathematical operators we have to do this with are the `4` opcode for increment, `5` for equals, and a decrement Nock function that I'll supply.
+The trick is that the only mathematical operators we have for this are the `4` opcode for increment, `5` for equals, and a decrement Nock function that I'll supply.
 
 If you want to give yourself a little challenge, try and figure out an algorithm for comparison before going to the next section.
 

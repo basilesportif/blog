@@ -1,8 +1,6 @@
 # Nock for Everyday Coders, Part 1: Basic Functions and Opcodes
 By `~timluc-miptev`
 
-Twitter: [@basile_sportif](https://twitter.com/basile_sportif)
-
 ## Series Outline
 * Part 1: Basic Functions and Opcodes
 * [Part 2: The Rest of Nock and Some Real-World Code](part2.html)

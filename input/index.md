@@ -1,5 +1,4 @@
 # welcome to `~timluc-miptev`
-Twitter: [@basile_sportif](https://twitter.com/basile_sportif)
 
 *"fsck this entire fscking ball of mud. For lo, its defects cannot be summarized; for they exceed the global supply of bullet points"*
 
@@ -25,4 +24,4 @@ I have other interests and may write about them as the mood strikes.
 * [Part 3: Design Patterns and Real Programs](part3.html)
 
 ## About Me
-* Email is dumb. You can DM me on Urbit (`~timluc-miptev`) or on Twitter (`@basile_sportif`).
+* Email is dumb. You can DM me on Urbit (`~timluc-miptev`).

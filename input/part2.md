@@ -3,8 +3,6 @@
 
 By `~timluc-miptev`
 
-Twitter: [@basile_sportif](https://twitter.com/basile_sportif)
-
 ## Series Outline
 * [Part 1: Basic Functions and Opcodes](part1.html)
 * Part 2: The Rest of Nock and Some Real-World Code

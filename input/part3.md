@@ -1,5 +1,14 @@
 # Nock for Everyday Coders, Part 3
 # Nock Design Patterns
+
+By `~timluc-miptev`
+
+## Series Outline
+* [Part 1: Basic Functions and Opcodes](part1.html)
+* [Part 2: The Rest of Nock and Some Real-World Code](part2.html)
+* [Interlude: Loose Ends and FAQ](faq.html)
+* Part 3: Design Patterns and Real Programs
+
 ## Intro
 After parts 1 and 2, you now know everything there is to know about Nock syntax and basic code manipulation.
 

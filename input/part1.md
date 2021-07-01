@@ -151,7 +151,7 @@ Drawn as ASCII art (this is **not** real Nock code), the tree looks like:
 So
 * `1` is the address of the whole tree, `[[4 5] [6 14 15]]`
 * `2` is the address of the left branch, `[4 5]`
-* `3` is the address of the right branch, `[[4 5] [6 14 15]]`
+* `3` is the address of the right branch, `[6 14 15]`
 * `15` is the value `15`
 
 Let's play around now in the dojo Nock interpreter so that we can confirm this. In each example, our subject (argument) will be the tree `[[4 5] [6 14 15]]`.

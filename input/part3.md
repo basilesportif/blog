@@ -72,7 +72,7 @@ Arms are best invoked using the `9` opcode. Here we use the "standard" version o
 #### Replacing the Sample
 To "pass a parameter" to our gate, we use the `10` opcode to edit the subject (the `inc-gate` core) and replace the payload with a value.
 
-We make our subject `[inc-gate val-to-decrement]`.
+We make our subject `[inc-gate val-to-increment]`.
 ```
 :: notice how opcode 10 can replace the last element of inc-gate
 :: the tail of inc-gate was 0; now it's 36

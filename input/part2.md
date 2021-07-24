@@ -27,6 +27,7 @@ In fact, that's not a bad way to think of Hoon: it's a higher-level language tha
 3. [`7`, the "Composition" Opcode](#7-the-composition-opcode)
 4. [`8`, the "Variable Adder" Opcode](#8-the-variable-adder-opcode)
 5. [`9`, Create a Core and Run One of Its Arms](#9-create-a-core-and-run-one-of-its-arms)
+5. [`10`, Replace a Memory Slot](#10-replace-a-memory-slot)
 6. [Real Nock Code](#real-nock-code)
 
 ## An Opening Note about the `1` Function

@@ -126,8 +126,8 @@ If you already understand why memory slot 5 of
 is `%pie`, you are good to go and can skip this explanation.
 
 #### Binary Tree Explanations
-* [official Hoon documents on binary trees](https://urbit.org/docs/tutorials/hoon/nouns/#noun-addresses)
-* the [Tree Addressing](https://urbit.org/docs/tutorials/nock/explanation/#tree-addressing) section of the Nock docs.
+* [official Hoon documents on binary trees](https://urbit.org/docs/hoon/hoon-school/nouns#noun-addresses)
+* [the Tree Addressing sectiion](https://urbit.org/docs/nock/explanation#tree-addressing)
 
 My explanation:
 Every noun in Nock can be thought of as a tree, which means we can give an exact number to access any position in the tree. This means that, no matter how big our subject (argument) is, we can yank a value out of any part of it.

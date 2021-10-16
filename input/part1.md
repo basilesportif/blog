@@ -84,7 +84,7 @@ A noun can be:
 We will be expanding Nock pseudocode manually in the examples that follow, in effect acting as our own interpreter.
 
 If we want to check that we're getting the right results from our manual interpretation, the Urbit dojo has a Hoon function that runs Nock code (i.e. a Nock interpreter). To use it:
-1. Start up a dojo session (see [here](https://urbit.org/using/develop/#creating-a-development-ship) for how to create a fake ship)
+1. Start up a dojo session (see [here](https://urbit.org/docs/development/environment) for how to create a fake ship)
 2. At the prompt, we can execute Nock with `.*(NOCK_SUBJECT, NOCK_FORMULA)`
 
 ### Subject, Formula?
